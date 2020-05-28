@@ -24,6 +24,7 @@
                             <thead>
                             <tr>
                                 <th>Artist Name</th>
+                                <th>Artist Image</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -31,6 +32,7 @@
                             @foreach($artists as $artist)
                                 <tr>
                                     <th scope="row">{{$artist->artist_name}}</th>
+                                    <th scope="row"> <img src="{{asset($artist->artist_image)}}" style="height: 50px;width: 50px;"></th>
                                     <td>
                                         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#updateartist{{$artist->id}}"><i class="fas fa-edit"></i> </button>
                                         <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteartisat{{$artist->id}}"><i class="fas fa-trash"></i> </button>
@@ -76,13 +78,19 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form action="{{route('admin.update.artist')}}" method="post">
+                                            <form action="{{route('admin.update.artist')}}" method="post" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label>Album Name</label>
                                                         <input type="text" class="form-control" name="artist_name" value="{{$artist->artist_name}}">
                                                         <input type="hidden" class="form-control" name="album_edit_id" value="{{$artist->id}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Artist Name</label>
+                                                        <br>
+                                                        <img src="{{asset($artist->artist_image)}}" style="height: 100px;width: 100px;">
+                                                        <input type="file" class="form-control" name="artist_image">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -122,12 +130,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{route('admin.create.artist')}}" method="post">
+                <form action="{{route('admin.create.artist')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Artist Name</label>
                             <input type="text" class="form-control" name="artist_name">
+                        </div>
+                        <div class="form-group">
+                            <label>Artist Name</label>
+                            <input type="file" class="form-control" name="artist_image">
                         </div>
                     </div>
                     <div class="modal-footer">

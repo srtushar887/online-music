@@ -52,14 +52,19 @@ Route::group(['middleware' => ['auth:admin']], function() {
         Route::post('/genres-delete', 'Admin\AdminMusicController@genres_delete')->name('admin.delete.genres');
 
 
+        //genres
+        Route::get('/songs-language', 'Admin\AdminMusicController@songs_language')->name('admin.song.language');
+        Route::post('/songs-language-save', 'Admin\AdminMusicController@songs_language_save')->name('admin.create.songs.language');
+        Route::post('/songs-language-update', 'Admin\AdminMusicController@songs_language_update')->name('admin.update.songs.language');
+        Route::post('/songs-language-delete', 'Admin\AdminMusicController@songs_language_delete')->name('admin.delete.songs.language');
+
+
+
+
         //songs
         Route::get('/songs', 'Admin\AdminMusicController@songs')->name('admin.songs');
-        Route::post('/songs-save', 'Admin\AdminMusicController@songs_save')->name('admin.create.genres');
-        Route::post('/songs-update', 'Admin\AdminMusicController@songs_update')->name('admin.update.genres');
-        Route::post('/songs-delete', 'Admin\AdminMusicController@songs_delete')->name('admin.delete.genres');
-
-
-
-
+        Route::post('/songs-save', 'Admin\AdminMusicController@songs_save')->name('admin.create.song');
+        Route::post('/songs-update', 'Admin\AdminMusicController@songs_update')->name('admin.update.song');
+        Route::post('/songs-delete', 'Admin\AdminMusicController@songs_delete')->name('admin.delete.song');
     });
 });

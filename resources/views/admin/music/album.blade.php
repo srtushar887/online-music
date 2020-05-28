@@ -18,12 +18,13 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Basic example</h4>
+                    <h4 class="card-title">Albums List</h4>
                     <div class="table-responsive">
                         <table class="table mb-0">
                             <thead>
                             <tr>
                                 <th>Album Name</th>
+                                <th>Album Image</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -31,6 +32,7 @@
                             @foreach($albums as $album)
                             <tr>
                                 <th scope="row">{{$album->album_name}}</th>
+                                <th scope="row"><img src="{{asset($album->album_image)}}" style="height: 50px;width: 50px;"></th>
                                 <td>
                                     <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#updatealbum{{$album->id}}"><i class="fas fa-edit"></i> </button>
                                     <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletealbum{{$album->id}}"><i class="fas fa-trash"></i> </button>
@@ -76,13 +78,19 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form action="{{route('admin.update.album')}}" method="post">
+                                        <form action="{{route('admin.update.album')}}" method="post" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label>Album Name</label>
                                                     <input type="text" class="form-control" name="album_name" value="{{$album->album_name}}">
                                                     <input type="hidden" class="form-control" name="album_edit_id" value="{{$album->id}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Album Image</label>
+                                                    <br>
+                                                    <img src="" style="height: 100px;width: 100px;">
+                                                    <input type="file" class="form-control" name="album_image" required>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -122,12 +130,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{route('admin.create.album')}}" method="post">
+                <form action="{{route('admin.create.album')}}" method="post" enctype="multipart/form-data">
                     @csrf
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Album Name</label>
-                        <input type="text" class="form-control" name="album_name">
+                        <input type="text" class="form-control" name="album_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Album Image</label>
+                        <input type="file" class="form-control" name="album_image" required>
                     </div>
                 </div>
                 <div class="modal-footer">

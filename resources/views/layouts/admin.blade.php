@@ -97,6 +97,7 @@
                             <li><a href="{{route('admin.album')}}">Albums</a></li>
                             <li><a href="{{route('admin.artist')}}">Artist</a></li>
                             <li><a href="{{route('admin.genres')}}">Genres</a></li>
+                            <li><a href="{{route('admin.song.language')}}">Songs Language</a></li>
                             <li><a href="{{route('admin.songs')}}">Songs</a></li>
                         </ul>
                     </li>
@@ -166,7 +167,8 @@
 
 <!-- App js -->
 <script src="{{asset('assets/admin/')}}/js/theme.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@include('layouts.message')
 </body>
 
 

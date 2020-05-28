@@ -3,10 +3,10 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-flex align-items-center justify-content-between">
-                <h4 class="mb-0 font-size-18">Genres</h4>
+                <h4 class="mb-0 font-size-18">Songs Language</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <button class="btn btn-success" data-toggle="modal" data-target="#createartist">Create Genres</button>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#createsonglangage">Create Song Language</button>
                     </ol>
                 </div>
             </div>
@@ -23,39 +23,37 @@
                         <table class="table mb-0">
                             <thead>
                             <tr>
-                                <th>Genres Name</th>
-                                <th>Genres Image</th>
+                                <th>langage Name</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($genres as $genre)
+                            @foreach($langs as $lan)
                                 <tr>
-                                    <th scope="row">{{$genre->genres_name}}</th>
-                                    <th scope="row"><img src="{{asset($genre->genres_image)}}" style="height: 50px;width: 50px;"></th>
+                                    <th scope="row">{{$lan->language_name}}</th>
                                     <td>
-                                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#updategenres{{$genre->id}}"><i class="fas fa-edit"></i> </button>
-                                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletegenres{{$genre->id}}"><i class="fas fa-trash"></i> </button>
+                                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#updatelanguage{{$lan->id}}"><i class="fas fa-edit"></i> </button>
+                                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletelangauage{{$lan->id}}"><i class="fas fa-trash"></i> </button>
                                     </td>
                                 </tr>
 
 
 
-                                <div class="modal fade" id="deletegenres{{$genre->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal fade" id="deletelangauage{{$lan->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Genres</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete Song Language</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form action="{{route('admin.delete.genres')}}" method="post" enctype="multipart/form-data">
+                                            <form action="{{route('admin.delete.songs.language')}}" method="post" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="modal-body">
                                                     <div class="form-group">
-                                                        are you sure to delete this album ?
-                                                        <input type="hidden" class="form-control" name="genres_delete_id" value="{{$genre->id}}">
+                                                        are you sure to delete this song language ?
+                                                        <input type="hidden" class="form-control" name="langiage_delete_id" value="{{$lan->id}}">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -69,28 +67,22 @@
 
 
 
-                                <div class="modal fade" id="updategenres{{$genre->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal fade" id="updatelanguage{{$lan->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Update Genres</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Update Song Language</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form action="{{route('admin.update.genres')}}" method="post">
+                                            <form action="{{route('admin.update.songs.language')}}" method="post">
                                                 @csrf
                                                 <div class="modal-body">
                                                     <div class="form-group">
-                                                        <label>Genres Name</label>
-                                                        <input type="text" class="form-control" name="genres_name" value="{{$genre->genres_name}}">
-                                                        <input type="hidden" class="form-control" name="genres_edit_id" value="{{$genre->id}}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Genres Image</label>
-                                                        <br>
-                                                        <img src="{{asset($genre->genres_image)}}" style="height: 100px;width: 100px;">
-                                                        <input type="file" class="form-control" name="genres_image">
+                                                        <label>Song Language Name</label>
+                                                        <input type="text" class="form-control" name="language_name" value="{{$lan->language_name}}">
+                                                        <input type="hidden" class="form-control" name="language_edit_id" value="{{$lan->id}}">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -121,25 +113,21 @@
 
 
 
-    <div class="modal fade" id="createartist" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="createsonglangage" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Create Genres</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Create Song Language</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{route('admin.create.genres')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('admin.create.songs.language')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Genres Name</label>
-                            <input type="text" class="form-control" name="genres_name">
-                        </div>
-                        <div class="form-group">
-                            <label>Genres Image</label>
-                            <input type="file" class="form-control" name="genres_image">
+                            <label>Song Language Name</label>
+                            <input type="text" class="form-control" name="language_name">
                         </div>
                     </div>
                     <div class="modal-footer">
