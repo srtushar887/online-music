@@ -199,6 +199,19 @@ class AdminMusicController extends Controller
         return view('admin.music.songs',compact('albums','artist','genres','languages','songs'));
     }
 
+
+    public function songs_create()
+    {
+        $albums = album::all();
+        $artist= artist::all();
+        $genres= genres::all();
+        $languages = language::all();
+        $songs = song::all();
+        return view('admin.music.songCreate',compact('albums','artist','genres','languages','songs'));
+
+    }
+
+
     public function songs_save(Request $request)
     {
         $song_save = new song();
@@ -238,12 +251,27 @@ class AdminMusicController extends Controller
         $song_save->genres_id = $request->genres_id;
         $song_save->language_id = $request->language_id;
         $song_save->is_paid = $request->is_paid;
+        $song_save->amount = $request->amount;
         $song_save->save();
 
         return back()->with('success','Song Created');
 
 
     }
+
+
+    public function songs_edit($id)
+    {
+
+        $albums = album::all();
+        $artist= artist::all();
+        $genres= genres::all();
+        $languages = language::all();
+        $songs = song::where('id',$id)->first();
+        return view('admin.music.songEdit',compact('albums','artist','genres','languages','songs'));
+
+    }
+
 
 
     public function songs_update(Request $request)
@@ -288,6 +316,7 @@ class AdminMusicController extends Controller
         $update_song->genres_id = $request->genres_id;
         $update_song->language_id = $request->language_id;
         $update_song->is_paid = $request->is_paid;
+        $update_song->amount = $request->amount;
         $update_song->save();
 
         return back()->with('success','Song Updated');

@@ -58,12 +58,11 @@ Route::group(['middleware' => ['auth:admin']], function() {
         Route::post('/songs-language-update', 'Admin\AdminMusicController@songs_language_update')->name('admin.update.songs.language');
         Route::post('/songs-language-delete', 'Admin\AdminMusicController@songs_language_delete')->name('admin.delete.songs.language');
 
-
-
-
         //songs
         Route::get('/songs', 'Admin\AdminMusicController@songs')->name('admin.songs');
+        Route::get('/song-create', 'Admin\AdminMusicController@songs_create')->name('admin.create.song.page');
         Route::post('/songs-save', 'Admin\AdminMusicController@songs_save')->name('admin.create.song');
+        Route::get('/song-edit/{id}', 'Admin\AdminMusicController@songs_edit')->name('admin.song.edit');
         Route::post('/songs-update', 'Admin\AdminMusicController@songs_update')->name('admin.update.song');
         Route::post('/songs-delete', 'Admin\AdminMusicController@songs_delete')->name('admin.delete.song');
     });

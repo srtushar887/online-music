@@ -1,4 +1,8 @@
 @extends('layouts.admin')
+@section('css')
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+@endsection
 @section('admin')
     <div class="row">
         <div class="col-12">
@@ -20,7 +24,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Genres List</h4>
                     <div class="table-responsive">
-                        <table class="table mb-0">
+                        <table class="table mb-0" id="genres">
                             <thead>
                             <tr>
                                 <th>Genres Name</th>
@@ -78,7 +82,7 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form action="{{route('admin.update.genres')}}" method="post">
+                                            <form action="{{route('admin.update.genres')}}" method="post" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="modal-body">
                                                     <div class="form-group">
@@ -152,4 +156,17 @@
     </div>
 
 
+@stop
+@section('js')
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+
+            $(document).ready(function () {
+                $('#genres').DataTable();
+
+            })
+        });
+    </script>
 @stop

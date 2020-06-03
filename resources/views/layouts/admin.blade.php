@@ -18,7 +18,7 @@
     <link href="{{asset('assets/admin/')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/admin/')}}/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/admin/')}}/css/theme.min.css" rel="stylesheet" type="text/css" />
-
+    @yield('css')
 </head>
 
 <body>
@@ -167,6 +167,9 @@
 
 <!-- App js -->
 <script src="{{asset('assets/admin/')}}/js/theme.js"></script>
+
+@yield('js')
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @include('layouts.message')
 </body>
