@@ -30,15 +30,6 @@
                                 <input type="text" class="form-control" name="song_name">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label>Album</label>
-                                <select class="form-control" name="album_id">
-                                    <option value="0">select any</option>
-                                    @foreach($albums as $ablum)
-                                        <option value="{{$ablum->id}}">{{$ablum->album_name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-4 mb-3">
                                 <label>Artist</label>
                                 <select class="form-control" name="artist_id">
                                     <option value="0">select any</option>
@@ -47,16 +38,24 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-6 mb-3">
+                                <label>Album</label>
+                                <select class="form-control" multiple name="album_id[]">
+                                    @foreach($albums as $ablum)
+                                        <option value="{{$ablum->id}}">{{$ablum->album_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
                                 <label>Genres</label>
-                                <select class="form-control" name="genres_id">
-                                    <option value="0">select any</option>
+                                <select class="form-control" multiple name="genres_id[]">
                                     @foreach($genres as $genre)
                                         <option value="{{$genre->id}}">{{$genre->genres_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label>Language</label>
                                 <select class="form-control" name="language_id">
                                     <option value="0">select any</option>

@@ -65,5 +65,7 @@ Route::group(['middleware' => ['auth:admin']], function() {
         Route::get('/song-edit/{id}', 'Admin\AdminMusicController@songs_edit')->name('admin.song.edit');
         Route::post('/songs-update', 'Admin\AdminMusicController@songs_update')->name('admin.update.song');
         Route::post('/songs-delete', 'Admin\AdminMusicController@songs_delete')->name('admin.delete.song');
+        Route::get('/delete-exist-song-album/{id}', 'Admin\AdminMusicController@delete_exist_song_album')->name('delete.exist.song.album');
+        Route::get('/delete-exist-song-gense/{id}', 'Admin\AdminMusicController@delete_exist_song_genres')->name('delete.exist.song.genrse');
     });
 });

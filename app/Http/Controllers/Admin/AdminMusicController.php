@@ -8,6 +8,8 @@ use App\genres;
 use App\Http\Controllers\Controller;
 use App\language;
 use App\song;
+use App\song_album;
+use App\song_genre;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -246,16 +248,36 @@ class AdminMusicController extends Controller
 
 
         $song_save->song_name = $request->song_name;
-        $song_save->album_id = $request->album_id;
         $song_save->artist_id = $request->artist_id;
-        $song_save->genres_id = $request->genres_id;
         $song_save->language_id = $request->language_id;
         $song_save->is_paid = $request->is_paid;
         $song_save->amount = $request->amount;
         $song_save->save();
 
-        return back()->with('success','Song Created');
 
+        $al = $request->album_id;
+
+        if ($al){
+            for ($i=0;$i<count($al);$i++){
+                $new_song_album = new song_album();
+                $new_song_album->song_id = $song_save->id;
+                $new_song_album->album_id = $al[$i];
+                $new_song_album->save();
+            }
+        }
+
+        $gen = $request->genres_id;
+
+        if ($gen){
+            for ($i=0;$i<count($gen);$i++){
+                $new_gen_album = new song_genre();
+                $new_gen_album->song_id = $song_save->id;
+                $new_gen_album->genre_id = $gen[$i];
+                $new_gen_album->save();
+            }
+        }
+
+        return back()->with('success','Song Created');
 
     }
 
@@ -311,13 +333,37 @@ class AdminMusicController extends Controller
 
 
         $update_song->song_name = $request->song_name;
-        $update_song->album_id = $request->album_id;
         $update_song->artist_id = $request->artist_id;
-        $update_song->genres_id = $request->genres_id;
         $update_song->language_id = $request->language_id;
         $update_song->is_paid = $request->is_paid;
         $update_song->amount = $request->amount;
         $update_song->save();
+
+
+
+
+        $al = $request->album_id;
+
+        if ($al){
+            for ($i=0;$i<count($al);$i++){
+                $new_song_album = new song_album();
+                $new_song_album->song_id = $update_song->id;
+                $new_song_album->album_id = $al[$i];
+                $new_song_album->save();
+            }
+        }
+
+        $gen = $request->genres_id;
+
+        if ($gen){
+            for ($i=0;$i<count($gen);$i++){
+                $new_gen_album = new song_genre();
+                $new_gen_album->song_id = $update_song->id;
+                $new_gen_album->genre_id = $gen[$i];
+                $new_gen_album->save();
+            }
+        }
+
 
         return back()->with('success','Song Updated');
     }
@@ -328,6 +374,24 @@ class AdminMusicController extends Controller
         $delete_song->delete();
         return back()->with('success','Song Deleted');
     }
+
+
+    public function delete_exist_song_album($id)
+    {
+        $del = song_album::where('id',$id)->first();
+        $del->delete();
+
+        return back();
+    }
+
+    public function delete_exist_song_genres($id)
+    {
+        $del = song_genre::where('id',$id)->first();
+        $del->delete();
+        return back();
+    }
+
+
 
 
 
